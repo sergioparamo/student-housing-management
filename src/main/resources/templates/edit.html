@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit House</title>
+</head>
+<body>
+
+<form method="post" action="#" th:action="@{/houses/edit/submit}"
+      th:object="${housesForm}">
+    <h1>Edit house</h1>
+
+
+    Title <input type="text" id="title" placeholder="House title..." th:field="*{title}"><br/>
+    Description <input type="text" id="description" placeholder="House description..." th:field="*{description}"><br/>
+    Facilities <input type="text" id="facilities" placeholder="House facilities..." th:field="*{facilities}"><br/>
+    Address <input type="text" id="address" placeholder="House description..." th:field="*{address}"><br/>
+    Area <input type="text" id="area" placeholder="House area..." th:field="*{area}"><br/>
+    Rent <input type="text" id="rent" placeholder="House rent..." th:field="*{rent}"><br/>
+    Deposit <input type="text" id="deposit" placeholder="House deposit..." th:field="*{deposit}"><br/>
+    Picture <input type="text" id="picture" placeholder="Picture URL..." th:field="*{picture}"><br/>
+    <button type="submit">Save</button>
+</form>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign out">
+</form>
+<form th:action="@{/}" method="get">
+    <input type="submit" value="Home">
+</form>
+</body>
+</html>

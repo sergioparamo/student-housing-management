@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login error</title>
+</head>
+<body>
+<div class="wrapper">
+    <div class="box">
+        <h1>Login error</h1>
+        <p>Wrong credentials, please try again</p>
+        <p>&#58;&#40;</p>
+    </div>
+</div>
+<form th:action="@{/}" method="get">
+    <input type="submit" value="Home">
+</form>
+</body>
+</html>

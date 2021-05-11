@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Invalid book data</title>
+</head>
+<body>
+<div class="wrapper">
+    <div class="box">
+        <h1></h1>
+        <p>The book's data is not valid</p>
+        <p><a href="/books/new">Try again</a></p>
+
+    </div>
+</div>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign out">
+</form>
+<form th:action="@{/}" method="get">
+    <input type="submit" value="Home">
+</form>
+</body>
+</html>
