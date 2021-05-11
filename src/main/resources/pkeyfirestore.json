@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "student-housing-app-ca163",
+  "private_key_id": "1e92d47135f25df0f1f9735c06e897d857a3c41b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCuNI1re+YGNNsV\n/Q6cjIsb0sGpW/vCfX0F5S5O26qCeU4y5i8CF2z88RsccKwRXihT0MzQsCNsGNTA\n8vya+H655V3ugfARSLLlRpsGaSuzCr9GqDA5sTt1yuE5JJpGtC8NaInQuDvAU976\nyyUsH0WjJvlTmoKF1+3NBKgGXI32BjB1K/sYfyFORrQrOfhrxihzwwOWZlxGymtT\nqedcKxRath69pRqekz+xSHHurEjUYwBrhua1e2Tff/Lyu7FltvmSkGgVqEetuFcP\nuWO28SrYB0pF9qlo7TACP2iNNaNUQfzfKRplLzx0/l3El7lCIz8K4rBX+PkZBoAN\nw9+Oo85hAgMBAAECggEAAN8sPUmRDCfVDvvcddJ0FjBO2W/MFTL5NU1O+42LE+8l\nHUlOrPycYZ88jAgRBzqB7vEocmAw/cKHVlFsZ0NquqXIBKmkuwRE8KFJpRos2Opr\nB/wYaWakMFrlF5HLAEfK6XyWQoqGoAWpI+TMACV9M8J+ECMBs0dpK9hxp9B+izsG\nWr6xGaEyQcY/JO5zzTNjznKUatmYIsKCUXR4vWyGoegl0q1+/Ro3cv1PJbTZMwbB\nXP8k6Lx8YrlM8/PLejHF6ljLVIkQV+OgegBg6zqxh9epm6lG68pfHD7BLcZpoWzO\nrXccltEEspxBMuNMBf/bTjHk3JaobEq+GOOg/EN8DQKBgQDvAjsx4sLIK/KaFcNj\naB7LN0C83ik+w4UA3oRV811UyAN8mBZZ2+WlYJDqUFvAMOXJWFskDOxvToqwgmFb\ngfG3tkusdRHSyiCEvP0xZOE48y5+7PapXcXgR+YWMKN0duNEE+OVa4q+if0sc6+k\nDN0gOv/ivh92LduqRODWkvOZRQKBgQC6lvM/qWteXryKA0Rxi8UhwsztJeZtVCgO\nPRwMiuncVueWtrfaoz0+YaHRXtAQThuI1p1vZdFaJvYgCR+1RHMgtDZD/4KQIl5q\nNjCl0R/T0Fhtwr7s5QoeCui6S0V0NicjL2e17bXuo15XXoOgHSRRV36C2M9Tu6yN\nbFLzNggcbQKBgQCSOxo+hk/IKuNOlNwrmMumZ9LK+13e0b8xbfMnpzNGKO3BMEgU\niG6zxSZExg+swf4FN3Lj1qhd3X8LSWoJk7JxRS59gE78WcCVlg+PRfpqXpbm/1JX\nA1GKzFKg5vdKzWZ1A3ottFN6CnEE3m7q/xfXnWFruAkFxD7uqR+rCNPTxQKBgAtG\nQ7x9CDfTkaDlQaV6xJadprRNrfa9Nw5lMuSvICJoPeYldEaJxpGWZKi6CehyT8ec\n8DZi+Jtx7z1QT9IsKKi5Ou4w6jq7WOkiDR533Gx4El/PfKnjzRCzqAxZsACtpP/D\nRYkArBWXWYP9+gYavK8Nkl9lqmFs3ahN+1Um1qahAoGAa76dlwZAxYoaHaq5M5aF\nwLPB2kQQ2285gces3pcPg39nittd2lwPw1/UaCGDDp54wjOQIMrsxMMti9slJgDr\n6jcGoKt845f9r5zVydm4jftfT/S+nYve+O2qiszNRvriH+eNYCFeQxujQ29cb773\nOvM3nHBziVARRC/hbGVplOE=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-1cmwk@student-housing-app-ca163.iam.gserviceaccount.com",
+  "client_id": "104021462609916338018",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-1cmwk%40student-housing-app-ca163.iam.gserviceaccount.com"
+}
