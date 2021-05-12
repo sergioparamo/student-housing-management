@@ -45,6 +45,7 @@ public class HouseController {
 
     }
 
+
     @GetMapping("/houses/edit/{id}")
     public String modifyHouseById(@PathVariable("id") String id, Model m) {
         House house = houseService.findById(id);
@@ -68,10 +69,6 @@ public class HouseController {
     @PostMapping("/houses/new/submit")
     public String addSubmit(@ModelAttribute("housesForm") House house) {
 
-        Random random = new Random();
-
-        //We set a temporary ID that will be changed later
-        house.setHouseId(String.valueOf(random.nextInt(999)));
 
         houseService.add(house);
         return "redirect:/houses/list";

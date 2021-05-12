@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of applications</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Application ID</th>
+        <th>Student name</th>
+        <th>Student email</th>
+        <th>State of the application</th>
+    </tr>
+    </br>
+    </thead>
+    <tbody>
+    <tr th:each="applicationVar : ${applicationsList}">
+        <td th:text="${applicationVar.applicationId}">8272</td>
+        <td th:text="${applicationVar.studentName}">John Doe</td>
+        <td th:text="${applicationVar.studentEmail}">john@doe.com</td>
+        <td th:text="${applicationVar.state}">State of the application</td>
+        <td><a th:href="@{/applications/delete/{id}(id=${applicationVar.applicationId})}">Delete application</a></td>
+        <br/>
+    </tr>
+    </tbody>
+</table>
+<br/>
+<!--<form th:action="@{/houses/sortByPrice}" method="get">
+    <input type="submit" value="Sort the list by price">
+</form>-->
+<form th:action="@{/applications/rentHouse/{id}(id=${houseId})}" method="post">
+    <input type="submit" value="Rent house">
+</form>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign out">
+</form>
+<form th:action="@{/}" method="get">
+    <input type="submit" value="Home">
+</form>
+</body>
+</html>

@@ -1,6 +1,7 @@
 package cat.itb.studenthousingweb.services;
 
 import cat.itb.studenthousingweb.models.House;
+import cat.itb.studenthousingweb.models.HouseApplication;
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.*;
@@ -13,10 +14,7 @@ import javax.annotation.PostConstruct;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -40,7 +38,25 @@ public class HouseService {
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(credentials)
                     .build();
-            FirebaseApp.initializeApp(options);
+
+            boolean hasBeenInitialized = false;
+
+            List<FirebaseApp> firebaseApps = FirebaseApp.getApps();
+            FirebaseApp finestayApp;
+            for (FirebaseApp app : firebaseApps) {
+                if (app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)) {
+                    hasBeenInitialized = true;
+                    finestayApp = app;
+                }
+            }
+
+            if (!hasBeenInitialized) {
+                finestayApp = FirebaseApp.initializeApp(options);
+            }
+
+
+           //FirebaseApp.initializeApp(options);
+
 
             db = FirestoreClient.getFirestore();
 
@@ -67,6 +83,12 @@ public class HouseService {
 
     //public void afegir(Empleat e);
     public void add(House house) {
+
+        Random random = new Random();
+
+        //We set a temporary ID that will be changed later
+        house.setHouseId(String.valueOf(random.nextInt(999)));
+
         //First we insert and then we will asign the houseId value from the UID value of the document
         housesCollection.add(house);
 
@@ -79,6 +101,7 @@ public class HouseService {
 
         try {
             for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
+
 
                 id = document.getId();
 
@@ -109,6 +132,10 @@ public class HouseService {
                 House house = doc.toObject(House.class);
                 repository.add(house);
             }
+
+            return repository;
+
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

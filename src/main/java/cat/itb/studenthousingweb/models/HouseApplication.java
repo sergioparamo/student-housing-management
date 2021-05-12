@@ -7,6 +7,8 @@ public class HouseApplication implements Serializable {
     String applicationId;
     String houseId;
     String studentId;
+    String studentName;
+    String studentEmail;
     String state;
 
     public HouseApplication() {
@@ -44,10 +46,28 @@ public class HouseApplication implements Serializable {
         this.state = state;
     }
 
-    public HouseApplication(String applicationId, String houseId, String studentId, String state) {
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public String getStudentEmail() {
+        return studentEmail;
+    }
+
+    public void setStudentEmail(String studentEmail) {
+        this.studentEmail = studentEmail;
+    }
+
+    public HouseApplication(String applicationId, String houseId, String studentId, String studentName, String studentEmail, String state) {
         this.applicationId = applicationId;
         this.houseId = houseId;
         this.studentId = studentId;
+        this.studentName = studentName;
+        this.studentEmail = studentEmail;
         this.state = state;
     }
 
@@ -57,6 +77,8 @@ public class HouseApplication implements Serializable {
                 "applicationId='" + applicationId + '\'' +
                 ", houseId='" + houseId + '\'' +
                 ", studentId='" + studentId + '\'' +
+                ", studentName='" + studentName + '\'' +
+                ", studentEmail='" + studentEmail + '\'' +
                 ", state='" + state + '\'' +
                 '}';
     }

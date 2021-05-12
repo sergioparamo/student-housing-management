@@ -27,8 +27,9 @@
         <td th:text="${house.area}">Nou Barris</td>
         <td th:text="${house.rent}">500euros</td>
         <td th:text="${house.deposit}">300euros</td>
-        <td><a th:href="@{/houses/edit/{id}(id=${house.houseId})}">Edit</a></td>
-        <td><a th:href="@{/houses/delete/{id}(id=${house.houseId})}">Delete</a></td>
+        <td><a th:href="@{/applications/{id}(id=${house.houseId})}">See applications</a></td>
+        <td><a th:href="@{/houses/edit/{id}(id=${house.houseId})}">Edit House</a></td>
+        <td><a th:href="@{/houses/delete/{id}(id=${house.houseId})}">Delete House</a></td>
         <br/>
     </tr>
     </tbody>
