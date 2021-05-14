@@ -1,5 +1,6 @@
 package cat.itb.studenthousingweb.security;
 
+import cat.itb.studenthousingweb.services.OwnerDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,14 +9,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    //@Autowired
-    //private MyUserDetailsService myUserDetailsService;
+    @Autowired
+    private OwnerDetailsService ownerDetailsService;
 
 
     @Bean
@@ -26,21 +26,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .inMemoryAuthentication()
-                .passwordEncoder(NoOpPasswordEncoder.getInstance())
-                .withUser("Montse")
-                .password("secret")
-                .roles("vip");
+                .userDetailsService(ownerDetailsService)
+                .passwordEncoder(passwordEncoder());
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .anyRequest().permitAll()
-                /*.antMatchers("/", "/hola", "/login", "/register", "/security_error", "/webjars/**", "/css/**").permitAll()
-                .antMatchers("/books/new/**", "/books/edit/**", "/books/delete/**").hasRole("ADMIN")
-                .antMatchers("/books/list").authenticated()*/
+                .antMatchers("/", "/login", "/register", "/security_error", "/webjars/**", "/css/**").permitAll()
+                .antMatchers("/applications**", "/houses/**", "/profile/**").authenticated()
 
 
                 .and()

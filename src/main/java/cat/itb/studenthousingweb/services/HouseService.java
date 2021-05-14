@@ -1,7 +1,6 @@
 package cat.itb.studenthousingweb.services;
 
 import cat.itb.studenthousingweb.models.House;
-import cat.itb.studenthousingweb.models.HouseApplication;
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.*;
@@ -17,6 +16,8 @@ import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
+import static cat.itb.studenthousingweb.services.OwnerDetailsService.currentOwnerId;
+
 @Service
 public class HouseService {
 
@@ -27,10 +28,9 @@ public class HouseService {
 
 
     @PostConstruct
-    private void initFirestore() throws IOException {
+    private void initFirestore() {
 
         try {
-
 
             // Use a service account
             InputStream serviceAccount = new FileInputStream("src/main/resources/pkeyfirestore.json");
@@ -55,13 +55,13 @@ public class HouseService {
             }
 
 
-           //FirebaseApp.initializeApp(options);
+            //FirebaseApp.initializeApp(options);
 
 
             db = FirestoreClient.getFirestore();
 
             housesCollection = db.collection("houses");
-            ApiFuture<QuerySnapshot> querySnapshot = housesCollection.get();
+            ApiFuture<QuerySnapshot> querySnapshot = housesCollection.whereEqualTo("ownerId",currentOwnerId).get();
             for (DocumentSnapshot doc : querySnapshot.get().getDocuments()) {
                 House house = doc.toObject(House.class);
                 repository.add(house);
@@ -84,39 +84,17 @@ public class HouseService {
     //public void afegir(Empleat e);
     public void add(House house) {
 
-        Random random = new Random();
-
-        //We set a temporary ID that will be changed later
-        house.setHouseId(String.valueOf(random.nextInt(999)));
-
-        //First we insert and then we will asign the houseId value from the UID value of the document
-        housesCollection.add(house);
-
-        // Create a query against the collection retrieving the object using the temporary ID
-        Query query = housesCollection.whereEqualTo("houseId", house.getHouseId());
-        // retrieve  query results asynchronously using query.get()
-        ApiFuture<QuerySnapshot> querySnapshot = query.get();
-
-        String id = "";
-
+        ApiFuture<DocumentReference> addedDocRef = housesCollection.add(house);
         try {
-            for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
-
-
-                id = document.getId();
-
-            }
+            System.out.println(" *********** Added document with ID: " + addedDocRef.get().getId());
+            housesCollection.document(addedDocRef.get().getId()).update("houseId", addedDocRef.get().getId());
+            house.setHouseId(addedDocRef.get().getId());
+            repository.add(house);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
-        //housesCollection.document(house.getHouseId()).update((Map<String, Object>) house);
-        housesCollection.document(id).update("houseId", id);
-        house.setHouseId(id);
-
-        repository.add(house);
 
 
     }
@@ -126,7 +104,7 @@ public class HouseService {
 
         repository.removeAll(repository);
 
-        ApiFuture<QuerySnapshot> querySnapshot = housesCollection.get();
+        ApiFuture<QuerySnapshot> querySnapshot = housesCollection.whereEqualTo("ownerId",currentOwnerId).get();
         try {
             for (DocumentSnapshot doc : querySnapshot.get().getDocuments()) {
                 House house = doc.toObject(House.class);
@@ -186,7 +164,7 @@ public class HouseService {
             }
         }
 
-        housesCollection.document(house.getHouseId()).update((Map<String, Object>) house);
+        housesCollection.document(house.getHouseId()).set(house);
         repository.set(position, house);
 
 

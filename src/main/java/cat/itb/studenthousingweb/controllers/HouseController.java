@@ -7,8 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Random;
 import java.util.concurrent.ExecutionException;
+
+import static cat.itb.studenthousingweb.services.OwnerDetailsService.currentOwnerId;
 
 @Controller
 public class HouseController {
@@ -70,6 +71,7 @@ public class HouseController {
     public String addSubmit(@ModelAttribute("housesForm") House house) {
 
 
+        house.setOwnerId(currentOwnerId);
         houseService.add(house);
         return "redirect:/houses/list";
 

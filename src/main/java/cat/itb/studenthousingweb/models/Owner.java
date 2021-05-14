@@ -1,15 +1,40 @@
 package cat.itb.studenthousingweb.models;
 
+import com.google.auto.value.AutoValue;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
+
 
 public class Owner implements Serializable {
 
     String ownerId;
     String name;
     String phone;
+    @Id
     String email;
     String password;
-    String cif;
+
+    @Override
+    public String toString() {
+        return "Owner{" +
+                "ownerId='" + ownerId + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    public Owner(String name, String phone, String email, String password) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+    }
 
     public String getOwnerId() {
         return ownerId;
@@ -51,25 +76,9 @@ public class Owner implements Serializable {
         this.password = password;
     }
 
-    public String getCif() {
-        return cif;
-    }
-
-    public void setCif(String cif) {
-        this.cif = cif;
-    }
-
-    public Owner(String name, String phone, String email, String password, String cif) {
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.password = password;
-        this.cif = cif;
-    }
 
     public Owner() {
 
     }
-
 
 }

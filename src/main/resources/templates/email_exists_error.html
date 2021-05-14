@@ -2,16 +2,15 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>The book already exists</title>
+    <title>The email already exists</title>
 </head>
 <body>
 <div class="wrapper">
     <div class="box">
         <h1>ERROR </h1>
-        <p>The book that you are trying to register already exists! (Please provide a different ID)</p>
+        <p>The email that you are trying to register already exists!</p>
         <p>&#58;&#40;</p>
-        <p><a href="/books/new">Try again</a></p>
-
+        <p><a href="/register">Try again</a></p>
     </div>
 </div>
 <form th:action="@{/logout}" method="post">
