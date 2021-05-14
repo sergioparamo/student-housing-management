@@ -1,11 +1,6 @@
 package cat.itb.studenthousingweb.models;
 
-import com.google.auto.value.AutoValue;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
 
 
@@ -14,7 +9,7 @@ public class Owner implements Serializable {
     String ownerId;
     String name;
     String phone;
-    @Id
+
     String email;
     String password;
 
