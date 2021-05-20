@@ -10,6 +10,12 @@ import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.swing.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDropEvent;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -61,7 +67,7 @@ public class HouseService {
             db = FirestoreClient.getFirestore();
 
             housesCollection = db.collection("houses");
-            ApiFuture<QuerySnapshot> querySnapshot = housesCollection.whereEqualTo("ownerId",currentOwnerId).get();
+            ApiFuture<QuerySnapshot> querySnapshot = housesCollection.whereEqualTo("ownerId", currentOwnerId).get();
             for (DocumentSnapshot doc : querySnapshot.get().getDocuments()) {
                 House house = doc.toObject(House.class);
                 repository.add(house);
@@ -84,6 +90,25 @@ public class HouseService {
     //public void afegir(Empleat e);
     public void add(House house) {
 
+
+        //Adding drop & file  functionality
+        JTextArea myPanel = new JTextArea();
+        myPanel.setDropTarget(new DropTarget() {
+            public synchronized void drop(DropTargetDropEvent evt) {
+                try {
+                    evt.acceptDrop(DnDConstants.ACTION_COPY);
+                    List<File> droppedFiles = (List<File>)
+                            evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
+                    for (File file : droppedFiles) {
+                        // process files
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+
         ApiFuture<DocumentReference> addedDocRef = housesCollection.add(house);
         try {
             System.out.println(" *********** Added document with ID: " + addedDocRef.get().getId());
@@ -104,7 +129,7 @@ public class HouseService {
 
         repository.removeAll(repository);
 
-        ApiFuture<QuerySnapshot> querySnapshot = housesCollection.whereEqualTo("ownerId",currentOwnerId).get();
+        ApiFuture<QuerySnapshot> querySnapshot = housesCollection.whereEqualTo("ownerId", currentOwnerId).get();
         try {
             for (DocumentSnapshot doc : querySnapshot.get().getDocuments()) {
                 House house = doc.toObject(House.class);

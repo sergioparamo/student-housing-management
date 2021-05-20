@@ -22,9 +22,19 @@ public class ApplicationsController {
     @GetMapping("/applications/{id}")
     public String displayApplicationsByHouse(@PathVariable("id") String id, Model m) {
 
-        m.addAttribute("applicationsList", applicationsService.getListFromApplicationsByHouseId(id));
-        m.addAttribute("houseId", id);
-        return "applications";
+        List applicationList = applicationsService.getListFromApplicationsByHouseId(id);
+
+        if (applicationList.isEmpty()) {
+
+            return "applications_404";
+
+        } else {
+
+            m.addAttribute("applicationsList", applicationList);
+            m.addAttribute("houseId", id);
+            return "applications";
+        }
+
 
     }
 
@@ -36,7 +46,7 @@ public class ApplicationsController {
         //Delete from firebase
         applicationsService.delete(houseApplication);
         m.addAttribute("applicationsList", applicationsService.getListFromApplicationsByHouseId(id));
-        return "redirect:/applications/"+id;
+        return "redirect:/applications/" + id;
 
     }
 
@@ -47,11 +57,9 @@ public class ApplicationsController {
         //Choose and update the field state of an application
         applicationsService.selectApplication(id);
         m.addAttribute("applicationsList", applicationsService.getListFromApplicationsByHouseId(id));
-        return "redirect:/applications/"+id;
+        return "redirect:/applications/" + id;
 
     }
-
-
 
 
 }

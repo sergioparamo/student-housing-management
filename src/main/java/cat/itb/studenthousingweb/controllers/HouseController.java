@@ -30,7 +30,7 @@ public class HouseController {
 
 
         m.addAttribute("housesForm", new House());
-        return "new";
+        return "upload";
     }
 
     @GetMapping("/houses/delete/{id}")

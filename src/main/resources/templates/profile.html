@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
+    <link rel="icon" href="/images/logo.jpeg" >
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Edit Profile</title>
 </head>
 <body>
 
@@ -13,7 +14,7 @@
     Email <input type="text" id="email" placeholder="john@doe.com" th:field="*{email}"><br/>
     Password <input type="text" id="password" placeholder="****" th:field="*{password}"><br/>
 
-    <button type="submit">Edit</button>
+    <button type="submit">Save</button>
 </form>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign out">

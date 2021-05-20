@@ -3,16 +3,20 @@
 <head>
     <link rel="icon" href="/images/logo.jpeg" >
     <meta charset="UTF-8">
-    <title>Login error</title>
+    <title>No applications list</title>
 </head>
 <body>
 <div class="wrapper">
     <div class="box">
-        <h1>Login error</h1>
-        <p>Wrong credentials, please try again</p>
-        <p>&#58;&#40;</p>
+        <p>This house doesn't have applications</p>
+        <a th:href="@{/houses/list}">Go back</a>
+        <br>
+        <br>
     </div>
 </div>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign out">
+</form>
 <form th:action="@{/}" method="get">
     <input type="submit" value="Home">
 </form>

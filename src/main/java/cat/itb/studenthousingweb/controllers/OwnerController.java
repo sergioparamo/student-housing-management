@@ -25,13 +25,13 @@ public class OwnerController {
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "loginnew";
     }
 
     @GetMapping("/register")
     public String register(Model m) {
         m.addAttribute("ownerForm", new Owner());
-        return "register";
+        return "registernew";
     }
 
     @PostMapping("/owner/new/submit")
@@ -50,7 +50,7 @@ public class OwnerController {
     @GetMapping("/profile")
     public String profile(Model m) {
         m.addAttribute("ownerForm", usersService.checkById(currentOwnerId));
-        return "profile";
+        return "profilenew";
     }
 
 
