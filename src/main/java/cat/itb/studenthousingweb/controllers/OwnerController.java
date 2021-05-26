@@ -3,6 +3,7 @@ package cat.itb.studenthousingweb.controllers;
 
 import cat.itb.studenthousingweb.models.Owner;
 import cat.itb.studenthousingweb.services.OwnerService;
+import com.google.firebase.auth.hash.Bcrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +43,7 @@ public class OwnerController {
     public String addSubmit(@ModelAttribute("ownerForm") Owner owner) {
 
         if (owner.getEmail().isEmpty() || owner.getPassword().isEmpty() || owner.getName().isEmpty() || owner.getPhone().isEmpty()) {
-            return "data_error";
+            return "register_error";
         } else if (usersService.checkEmailExists(owner)) {
             return "email_exists_error";
         } else {
@@ -53,7 +54,10 @@ public class OwnerController {
 
     @GetMapping("/profile")
     public String profile(Model m) {
-        m.addAttribute("ownerForm", usersService.checkById(currentOwnerId));
+
+        Owner owner = usersService.checkById(currentOwnerId);
+        m.addAttribute("ownerForm", owner);
+
         return "profilenew";
     }
 
@@ -62,7 +66,7 @@ public class OwnerController {
     public String editSubmit(@ModelAttribute("ownerForm") Owner owner) {
 
         if (owner.getEmail().isEmpty() || owner.getPassword().isEmpty() || owner.getName().isEmpty() || owner.getPhone().isEmpty()) {
-            return "data_error";
+            return "register_error";
         } else {
             usersService.edit(owner);
             return "redirect:/";
