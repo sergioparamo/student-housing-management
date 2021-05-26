@@ -22,9 +22,10 @@ public class OwnerController {
     @GetMapping("/")
     public String home(Model m) {
 
-        Owner owner = usersService.checkById(currentOwnerId);
-
-        m.addAttribute("owner", owner);
+        if (currentOwnerId != null) {
+            Owner owner = usersService.checkById(currentOwnerId);
+            m.addAttribute("owner", owner);
+        }
         return "index";
     }
 
