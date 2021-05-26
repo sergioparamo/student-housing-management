@@ -91,27 +91,8 @@ public class HouseService {
     public void add(House house) {
 
 
-        //Adding drop & file  functionality
-        JTextArea myPanel = new JTextArea();
-        myPanel.setDropTarget(new DropTarget() {
-            public synchronized void drop(DropTargetDropEvent evt) {
-                try {
-                    evt.acceptDrop(DnDConstants.ACTION_COPY);
-                    List<File> droppedFiles = (List<File>)
-                            evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
-                    for (File file : droppedFiles) {
-                        // process files
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
-
-
         ApiFuture<DocumentReference> addedDocRef = housesCollection.add(house);
         try {
-            System.out.println(" *********** Added document with ID: " + addedDocRef.get().getId());
             housesCollection.document(addedDocRef.get().getId()).update("houseId", addedDocRef.get().getId());
             house.setHouseId(addedDocRef.get().getId());
             repository.add(house);

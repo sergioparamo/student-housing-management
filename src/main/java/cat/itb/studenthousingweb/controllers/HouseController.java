@@ -21,7 +21,7 @@ public class HouseController {
     @GetMapping("/houses/list")
     public String displayHouseList(Model m) throws ExecutionException, InterruptedException {
         m.addAttribute("housesList", houseService.list());
-        return "info";
+        return "infonew";
     }
 
 
@@ -30,7 +30,7 @@ public class HouseController {
 
 
         m.addAttribute("housesForm", new House());
-        return "upload";
+        return "addnew";
     }
 
     @GetMapping("/houses/delete/{id}")
@@ -64,7 +64,7 @@ public class HouseController {
 
 
         m.addAttribute("housesList", houseService.sortHousesByPrice());
-        return "info";
+        return "infonew";
     }
 
     @PostMapping("/houses/new/submit")

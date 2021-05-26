@@ -19,7 +19,11 @@ public class OwnerController {
     private OwnerService usersService;
 
     @GetMapping("/")
-    public String home() {
+    public String home(Model m) {
+
+        Owner owner = usersService.checkById(currentOwnerId);
+
+        m.addAttribute("owner", owner);
         return "index";
     }
 
