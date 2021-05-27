@@ -3,7 +3,6 @@ package cat.itb.studenthousingweb.controllers;
 
 import cat.itb.studenthousingweb.models.Owner;
 import cat.itb.studenthousingweb.services.OwnerService;
-import com.google.firebase.auth.hash.Bcrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,13 +63,16 @@ public class OwnerController {
 
 
     @PostMapping("/owner/edit/submit")
-    public String editSubmit(@ModelAttribute("ownerForm") Owner owner) {
+    public String editSubmit(@ModelAttribute("ownerForm") Owner owner, Model m) {
 
-        if (owner.getEmail().isEmpty() || owner.getPassword().isEmpty() || owner.getName().isEmpty() || owner.getPhone().isEmpty()) {
+        System.out.println(owner.toString());;
+
+        if (owner.getEmail().isEmpty() || owner.getName().isEmpty() || owner.getPhone().isEmpty()) {
             return "register_error";
         } else {
             usersService.edit(owner);
-            return "redirect:/";
+            m.addAttribute("owner", owner);
+            return "index";
         }
     }
 

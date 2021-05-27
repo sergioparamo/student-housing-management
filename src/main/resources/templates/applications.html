@@ -1,44 +1,72 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>List of applications</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/login.css}" href="src/main/resources/static/css/login.css">
 </head>
 <body>
-<table>
-    <thead>
-    <tr>
-        <th>Application ID</th>
-        <th>Student name</th>
-        <th>Student email</th>
-        <th>State of the application</th>
-    </tr>
-    </br>
-    </thead>
-    <tbody>
-    <tr th:each="applicationVar : ${applicationsList}">
-        <td th:text="${applicationVar.applicationId}">8272</td>
-        <td th:text="${applicationVar.studentName}">John Doe</td>
-        <td th:text="${applicationVar.studentEmail}">john@doe.com</td>
-        <td th:text="${applicationVar.state}">State of the application</td>
-        <td><a th:href="@{/applications/delete/{id}(id=${applicationVar.applicationId})}">Delete application</a></td>
-        <br/>
-    </tr>
-    </tbody>
-</table>
-<br/>
-<!--<form th:action="@{/houses/sortByPrice}" method="get">
-    <input type="submit" value="Sort the list by price">
-</form>-->
-<form th:action="@{/applications/rentHouse/{id}(id=${houseId})}" method="post">
-    <input type="submit" value="Rent house">
-</form>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign out">
-</form>
-<form th:action="@{/}" method="get">
-    <input type="submit" value="Home">
-</form>
+<div th:if="${param.error}">
+    Wrong credentials, please try again
+</div>
+<div th:if="${param.logout}">
+    Disconnected
+</div>
+<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container">
+        <div class="card login-card">
+            <div class="row no-gutters">
+                <div class="col-md-5">
+                    <img src="/images/users.jpg" alt="login" class="login-card-img">
+                </div>
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <p class="login-card-description">List of applications</p>
+
+                        <table>
+                            <thead>
+                            <tr>
+                                <div class="form-group">
+                                    <th>Application ID</th>
+                                </div>
+                                <div class="form-group">
+                                    <th>State of the application</th>
+                                </div>
+                            </tr>
+                            </br>
+                            </thead>
+                            <tbody>
+                            <tr th:each="applicationVar : ${applicationsList}">
+                                <div class="form-group">
+                                    <td><a th:text="${applicationVar.applicationId}"></a></td>
+                                </div>
+                                <div class="form-group">
+                                    <td><a th:text="${applicationVar.state}"></a></td>
+                                </div>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <form th:action="@{/applications/rentHouse/{id}(id=${houseId})}" method="post">
+                            <input type="submit" value="Rent house">
+                        </form>
+                        <form th:action="@{/houses/list}" method="get">
+                            <input type="submit" value="Go back">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </body>
 </html>

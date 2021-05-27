@@ -164,6 +164,7 @@ public class HouseService {
 
         int position = 0;
 
+
         for (int i = 0; i < repository.size(); i++) {
             if (repository.get(i).getHouseId().equals(house.getHouseId())) {
                 position = i;

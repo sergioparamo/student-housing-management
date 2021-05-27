@@ -106,13 +106,6 @@ public class ApplicationsService {
         return houseApplication;
     }
 
-    public void delete(HouseApplication houseApplication) {
-
-        applicationsCollection.document(houseApplication.getApplicationId()).delete();
-        houseApplicationRepository.remove(houseApplication);
-
-    }
-
     public void selectApplication(String id) {
 
         //Generate a random number based on the size of the current repo

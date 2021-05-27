@@ -10,6 +10,9 @@ import com.google.firebase.auth.EmailIdentifier;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GetUsersResult;
 import com.google.firebase.auth.UserRecord;
+
+import static cat.itb.studenthousingweb.services.OwnerDetailsService.currentOwnerId;
+
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -144,8 +147,7 @@ public class OwnerService {
 
     public void edit(Owner owner) {
 
-        owner.setPassword(BCrypt.hashpw(owner.getPassword(), BCrypt.gensalt(12)));
-        System.out.println("OWNER NUEVO " + owner.toString());
+        owner.setOwnerId(currentOwnerId);
         ownerCollection.document(owner.getOwnerId()).set(owner);
     }
 

@@ -22,33 +22,33 @@
                     <div class="card-body">
 
                         <p class="login-card-description">Your Profile</p>
-                        <form th:action="@{/owner/edit/submit}" action="#" method="post" th:object="${ownerForm}">
+                        <form th:action="@{/owner/edit/submit}"  method="post" th:object="${ownerForm}">
 
                             <div class="form-group">
 
                                 <label for="name" class="sr-only">Name</label>
-                                <input type="text" name="name" id="name" placeholder="Name"
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Name"
                                        th:field="*{name}">
                             </div>
 
                             <div class="form-group">
 
                                 <label for="phone" class="sr-only">Email</label>
-                                <input type="text" name="phone" id="phone"  placeholder="Phone"
+                                <input type="text" name="phone" id="phone"  placeholder="Phone" class="form-control"
                                        th:field="*{phone}">
                             </div>
 
                             <div class="form-group">
 
                                 <label for="email" class="sr-only">Email</label>
-                                <input type="text" name="username" id="email"
+                                <input type="text" name="username" id="email" class="form-control"
                                        placeholder="Email address" th:field="*{email}">
                             </div>
                             <div class="form-group mb-4">
 
                                 <label for="password" class="sr-only">Password</label>
-                                <input type="text" name="password" id="password"
-                                       placeholder="***********" th:field="*{password}">
+                                <input type="text" name="password" id="password" class="form-control"
+                                       placeholder="***********" th:field="*{password}" readonly>
                             </div>
                             <input name="edit" id="edit" class="btn btn-block login-btn mb-4" type="submit"
                                    value="Save">

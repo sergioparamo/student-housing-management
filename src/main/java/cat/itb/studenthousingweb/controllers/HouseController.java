@@ -23,13 +23,13 @@ public class HouseController {
     public String displayHouseList(Model m) throws ExecutionException, InterruptedException {
 
         List<House> houseList = houseService.list();
-        if (houseService.list().isEmpty()){
+        if (houseService.list().isEmpty()) {
 
             return "houses_404";
 
-        }else {
+        } else {
             m.addAttribute("housesList", houseList);
-            return "infonew";
+            return "house_list";
         }
     }
 
@@ -46,24 +46,33 @@ public class HouseController {
     public String removeHouseById(@PathVariable("id") String id, Model m) {
         House house = houseService.findById(id);
 
-        //Delete from firebase
-
-
         houseService.delete(house);
-        m.addAttribute("housesList", houseService.list());
-        return "redirect:/houses/list";
+
+        System.out.println("**************************** " + houseService.list().isEmpty());
+
+        if (houseService.list().isEmpty()) {
+            return "houses_404";
+        } else {
+            m.addAttribute("housesList", houseService.list());
+            return "redirect:/houses/list";
+
+        }
+
 
     }
 
 
     @GetMapping("/houses/edit/{id}")
     public String modifyHouseById(@PathVariable("id") String id, Model m) {
+
         House house = houseService.findById(id);
 
         System.out.println(house.toString());
 
         m.addAttribute("housesForm", house);
-        return "edit";
+        m.addAttribute("givenHouseId", house.getHouseId());
+        return "edithouse";
+
 
     }
 
@@ -73,15 +82,13 @@ public class HouseController {
 
 
         m.addAttribute("housesList", houseService.sortHousesByPrice());
-        return "infonew";
+        return "house_list";
     }
 
     @PostMapping("/houses/new/submit")
     public String addSubmit(@ModelAttribute("housesForm") House house) {
 
-
-        house.setOwnerId(currentOwnerId);
-        if (house.getRent() == 0 || house.getTitle().isEmpty()
+        if (house.getRent() == 0 || house.getTitle().isEmpty() || house.getDescription().isEmpty()
                 || house.getAddress().isEmpty() || house.getDeposit() == 0 || house.getArea().isEmpty()
                 || house.getPicture().isEmpty() || house.getFacilities().isEmpty()) {
             return "add_house_error";
@@ -96,7 +103,18 @@ public class HouseController {
     @PostMapping("/houses/edit/submit")
     public String editSubmit(@ModelAttribute("housesForm") House house) {
 
-        houseService.modify(house);
-        return "redirect:/houses/list";
+
+        house.setHouseId(currentOwnerId);
+        System.out.println(house.toString());
+
+        if (house.getRent() == 0 || house.getTitle().isEmpty() || house.getDescription().isEmpty()
+                || house.getAddress().isEmpty() || house.getDeposit() == 0 || house.getArea().isEmpty()
+                || house.getPicture().isEmpty() || house.getFacilities().isEmpty()) {
+            return "edit_house_error";
+        } else {
+
+            houseService.modify(house);
+            return "redirect:/houses/list";
+        }
     }
 }

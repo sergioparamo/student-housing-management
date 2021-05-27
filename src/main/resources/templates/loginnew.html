@@ -12,12 +12,6 @@
     <link rel="stylesheet" th:href="@{/css/login.css}" href="src/main/resources/static/css/login.css" >
 </head>
 <body>
-<div th:if="${param.error}">
-    Wrong credentials, please try again
-</div>
-<div th:if="${param.logout}">
-    Disconnected
-</div>
 <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
     <div class="container">
         <div class="card login-card">

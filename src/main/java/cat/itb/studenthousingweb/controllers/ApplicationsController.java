@@ -38,18 +38,6 @@ public class ApplicationsController {
 
     }
 
-    @GetMapping("/applications/delete/{id}")
-    public String deleteApplicationById(@PathVariable("id") String id, Model m) {
-
-        HouseApplication houseApplication = applicationsService.findById(id);
-
-        //Delete from firebase
-        applicationsService.delete(houseApplication);
-        m.addAttribute("applicationsList", applicationsService.getListFromApplicationsByHouseId(id));
-        return "redirect:/applications/" + id;
-
-    }
-
     @PostMapping("/applications/rentHouse/{id}")
     public String rentHouse(@PathVariable("id") String id, Model m) {
 

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>List of houses</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/login.css}" href="src/main/resources/static/css/login.css">
+</head>
+<body>
+<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container">
+        <div class="card login-card">
+            <div class="row no-gutters">
+
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <p class="login-card-description">List of houses</p>
+
+                        <table>
+                            <thead>
+                            <tr>
+                                <div class="form-group">
+                                    <th>Title</th>
+                                </div>
+                                <div class="form-group">
+                                    <th>Description</th>
+                                </div>
+                                <div class="form-group">
+                                    <th>Facilities</th>
+                                </div>
+                                <div class="form-group">
+                                    <th>Address</th>
+                                </div>
+                                <div class="form-group">
+                                    <th>Area</th>
+                                </div>
+                                <div class="form-group">
+                                    <th>Rent</th>
+                                </div>
+                                <div class="form-group">
+                                    <th>Deposit</th>
+                                </div>
+                            </tr>
+                            </br>
+                            </thead>
+                            <tbody>
+                            <tr th:each="house : ${housesList}">
+                                <div class="form-group">
+                                    <td th:text="${house.title}">Bonito departamento</td>
+                                </div>
+                                <div class="form-group">
+                                    <td th:text="${house.description}">amplio y con buenas vistas</td>
+                                </div>
+                                <div class="form-group">
+                                    <td th:text="${house.facilities}">TV, internet, nevera</td>
+                                </div>
+                                <div class="form-group">
+                                    <td th:text="${house.address}">Pi i molist 23</td>
+                                </div>
+                                <div class="form-group">
+                                    <td th:text="${house.area}">Nou Barris</td>
+                                </div>
+                                <div class="form-group">
+                                    <td th:text="${house.rent}">500euros</td>
+                                </div>
+                                <div class="form-group">
+                                    <td th:text="${house.deposit}">300euros</td>                                </div>
+
+                                <div class="form-group">
+                                    <td><a th:href="@{/applications/{id}(id=${house.houseId})}">Applications</a></td>
+                                </div>
+
+                                <div class="form-group">
+                                    <td><a th:href="@{/houses/edit/{id}(id=${house.houseId})}">Edit</a></td>
+                                </div>
+
+                                <div class="form-group">
+                                    <td><a th:href="@{/houses/delete/{id}(id=${house.houseId})}">Delete</a></td>
+                                </div>
+
+
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+
+                        <div class="form-group">
+                            <a th:href="@{/houses/new}" class="btn btn-block login-btn mb-4">Publish house</a>
+                        </div>
+                        <div class="form-group">
+                            <a th:href="@{/}" class="btn btn-block login-btn mb-4">Home</a>
+                        </div>
+
+
+                        <!--<form th:action="@{/houses/new}" method="get">
+                            <input type="submit" value="Publish house">
+                        </form>
+                        <form th:action="@{/}" method="get">
+                            <input type="submit" value="Home">
+                        </form>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

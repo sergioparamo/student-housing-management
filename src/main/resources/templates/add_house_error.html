@@ -25,10 +25,13 @@
                         <div class="wrapper">
                             <div class="box">
                                 <p>Please try again and fill all the fields</p>
-                                <a th:href="@{/houses/new}">Try again</a>
-                                <a th:href="@{/}">Home</a>
-                                <br>
-                                <br>
+
+                                <div class="form-group">
+                                    <a th:href="@{/houses/new}" class="btn btn-block login-btn mb-4">Try again</a>
+                                </div>
+                                <div class="form-group">
+                                    <a th:href="@{/}" class="btn btn-block login-btn mb-4">Home</a>
+                                </div>
                             </div>
                         </div>
                     </div>
