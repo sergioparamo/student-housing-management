@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
+import static cat.itb.studenthousingweb.services.OwnerDetailsService.currentOwnerId;
+
 @Service
 public class ApplicationsService {
 
@@ -32,15 +34,28 @@ public class ApplicationsService {
     private void initFirestore() throws IOException {
 
         try {
-
-
-            // Use a service account
+            
             InputStream serviceAccount = new FileInputStream("src/main/resources/pkeyfirestore.json");
             GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(credentials)
                     .build();
-            FirebaseApp.initializeApp(options);
+
+            boolean hasBeenInitialized = false;
+
+            List<FirebaseApp> firebaseApps = FirebaseApp.getApps();
+            FirebaseApp finestayApp;
+            for (FirebaseApp app : firebaseApps) {
+                if (app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)) {
+                    hasBeenInitialized = true;
+                    finestayApp = app;
+                }
+            }
+
+            if (!hasBeenInitialized) {
+                finestayApp = FirebaseApp.initializeApp(options);
+            }
+
 
             db = FirestoreClient.getFirestore();
 
