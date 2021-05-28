@@ -88,12 +88,13 @@ public class HouseController {
     @PostMapping("/houses/new/submit")
     public String addSubmit(@ModelAttribute("housesForm") House house) {
 
+
         if (house.getRent() == 0 || house.getTitle().isEmpty() || house.getDescription().isEmpty()
                 || house.getAddress().isEmpty() || house.getDeposit() == 0 || house.getArea().isEmpty()
                 || house.getPicture().isEmpty() || house.getFacilities().isEmpty()) {
             return "add_house_error";
         } else {
-
+            house.setOwnerId(currentOwnerId);
             houseService.add(house);
             return "redirect:/houses/list";
         }
@@ -105,7 +106,6 @@ public class HouseController {
 
 
         house.setHouseId(currentOwnerId);
-        System.out.println(house.toString());
 
         if (house.getRent() == 0 || house.getTitle().isEmpty() || house.getDescription().isEmpty()
                 || house.getAddress().isEmpty() || house.getDeposit() == 0 || house.getArea().isEmpty()
