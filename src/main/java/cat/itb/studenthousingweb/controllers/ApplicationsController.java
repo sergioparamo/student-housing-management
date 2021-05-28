@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+/** House Application Controller Class
+ *
+ * @author Sergio
+ * @version 28/05/2021
+ */
 @Controller
 public class ApplicationsController {
 

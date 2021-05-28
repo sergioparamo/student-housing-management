@@ -105,7 +105,7 @@ public class HouseController {
     public String editSubmit(@ModelAttribute("housesForm") House house) {
 
 
-        house.setHouseId(currentOwnerId);
+        house.setOwnerId(currentOwnerId);
 
         if (house.getRent() == 0 || house.getTitle().isEmpty() || house.getDescription().isEmpty()
                 || house.getAddress().isEmpty() || house.getDeposit() == 0 || house.getArea().isEmpty()
